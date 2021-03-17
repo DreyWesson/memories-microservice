@@ -1,6 +1,6 @@
 version: "3"
 services:
-  api-server:
+  backend:
     container_name: memories-backend
     restart: always
     build: 
@@ -9,10 +9,8 @@ services:
     volumes: 
       - /app/node_modules
       - ./:/app
-    ports:
-      - 5000:5000
-    # depends_on: 
-    #   - mongodb
+    # ports:
+    #   - 5000:5000
     environment: 
       MONGO_URI: ${MONGO_URI}
       JWT_SECRET: ${JWT_SECRET}
@@ -23,7 +21,7 @@ services:
     networks:
       - memories-mern-app
 
-  client:
+  frontend:
     container_name: memories-frontend
     restart: always
     build: 
@@ -32,14 +30,26 @@ services:
     volumes: 
       - /app/node_modules
       - ./frontend:/app
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
     networks:
       - memories-mern-app
     depends_on:
-      - api-server
+      - backend
+
+  nginx:
+    restart: always
+    depends_on:
+      - backend
+      - frontend
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.dev
+    ports: 
+      - 8080:80
+    networks: 
+      - memories-mern-app
 
 networks:
   memories-mern-app:
     driver: bridge
-
