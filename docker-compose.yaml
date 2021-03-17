@@ -1,0 +1,45 @@
+version: "3"
+services:
+  api-server:
+    container_name: memories-backend
+    restart: always
+    build: 
+      context: ./
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - /app/node_modules
+      - ./:/app
+    ports:
+      - 5000:5000
+    # depends_on: 
+    #   - mongodb
+    environment: 
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      EMAIL_SERVICE: ${EMAIL_SERVICE}
+      EMAIL_USERNAME: ${EMAIL_USERNAME}
+      EMAIL_PASSWORD: ${EMAIL_PASSWORD}
+      EMAIL_FROM: ${EMAIL_FROM}
+    networks:
+      - memories-mern-app
+
+  client:
+    container_name: memories-frontend
+    restart: always
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes: 
+      - /app/node_modules
+      - ./frontend:/app
+    ports:
+      - 3000:3000
+    networks:
+      - memories-mern-app
+    depends_on:
+      - api-server
+
+networks:
+  memories-mern-app:
+    driver: bridge
+

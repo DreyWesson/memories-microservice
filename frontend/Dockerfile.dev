@@ -1,0 +1,16 @@
+FROM node:14-alpine
+
+LABEL version="1.0"
+LABEL description="Frontend Development image for the Memories-MicroService App"
+
+WORKDIR /app
+
+COPY ./package.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "npm", "run", "start" ]

@@ -1,0 +1,17 @@
+FROM node:14-alpine
+
+LABEL version="1.0"
+LABEL description="Backend Development image for the Memories-MicroService App"
+
+WORKDIR /app
+
+COPY ["package.json","package-lock.json", "./"]
+
+RUN npm install -g nodemon
+RUN npm install
+
+COPY . .
+
+EXPOSE 5000
+
+CMD [ "npm", "run", "server" ]
