@@ -3,15 +3,15 @@ services:
   backend:
     container_name: memories-backend
     restart: always
-    build:
+    build: 
       context: ./
-      dockerfile: Dockerfile.dev
-    volumes:
+      dockerfile: Dockerfile
+    volumes: 
       - /app/node_modules
       - ./:/app
     # ports:
     #   - 5000:5000
-    environment:
+    environment: 
       MONGO_URI: ${MONGO_URI}
       JWT_SECRET: ${JWT_SECRET}
       EMAIL_SERVICE: ${EMAIL_SERVICE}
@@ -25,18 +25,14 @@ services:
     container_name: memories-frontend
     restart: always
     stdin_open: true
-    build:
+    build: 
       context: ./frontend
-      dockerfile: Dockerfile.dev
-    volumes:
+      dockerfile: Dockerfile
+    volumes: 
       - /app/node_modules
       - ./frontend:/app
     # ports:
     #   - 3000:3000
-    environment:
-      REACT_APP_CLIENT_ID: ${CLIENT_ID}
-    # args:
-    #   REACT_APP_CLIENT_ID: ${CLIENT_ID}
     networks:
       - memories-mern-app
     depends_on:
@@ -49,10 +45,10 @@ services:
       - frontend
     build:
       context: ./nginx
-      dockerfile: Dockerfile.dev
-    ports:
-      - 8080:80
-    networks:
+      dockerfile: Dockerfile
+    ports: 
+      - 80:80
+    networks: 
       - memories-mern-app
 
 networks:

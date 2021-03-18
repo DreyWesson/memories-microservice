@@ -1,4 +1,4 @@
-FROM node:14-alpine as builder
+FROM node:14-alpine3.10 as builder
 
 LABEL version="1.0"
 LABEL description="Frontend Production image for the Memories-MicroService App"

@@ -10,7 +10,6 @@ import {
 } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-
 import Icon from "./icon";
 import useStyles from "./styles";
 import { LockOutlined } from "@material-ui/icons";
@@ -45,6 +44,10 @@ export const Auth = ({
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
+  const { REACT_APP_CLIENT_ID } = process.env;
+
+  console.log(REACT_APP_CLIENT_ID);
+  console.log(process.env);
 
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -183,7 +186,7 @@ export const Auth = ({
             {isSignup ? "Sign Up" : "Sign In"}
           </Button>
           <GoogleLogin
-            clientId="564842978452-tm3hgg3ff5m9k2olbtmvap0m2skag09e.apps.googleusercontent.com"
+            clientId={REACT_APP_CLIENT_ID}
             onSuccess={googleSuccess}
             onFailure={googleError}
             cookiePolicy="single_host_origin"

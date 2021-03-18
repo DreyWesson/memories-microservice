@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:14-alpine3.10
 
 LABEL version="1.0"
 LABEL description="Frontend Development image for the Memories-MicroService App"
@@ -8,6 +8,10 @@ WORKDIR /app
 COPY ./package.json ./
 
 RUN npm install
+
+ARG REACT_APP_CLIENT_ID
+
+ENV REACT_APP_CLIENT_ID=$REACT_APP_CLIENT_ID
 
 COPY . .
 
