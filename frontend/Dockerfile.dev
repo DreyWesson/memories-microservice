@@ -3,9 +3,11 @@ FROM node:14-alpine3.10
 LABEL version="1.0"
 LABEL description="Frontend Development image for the Memories-MicroService App"
 
+USER node
 WORKDIR /app
 
 COPY ./package.json ./
+COPY --chown=node:node . /app
 
 RUN npm install
 

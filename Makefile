@@ -22,5 +22,15 @@ prune:
 check_config:
 	docker-compose config
 
+image_state:
+	docker-compose ps
+
+container_state:
+	docker ps
+
 volume:
 	docker volume inspect memories_mongodb-data
+
+# check USER
+# check_user: 
+# 	docker exec image_name ps aux

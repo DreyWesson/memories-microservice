@@ -3,15 +3,15 @@ services:
   backend:
     container_name: memories-backend
     restart: always
-    build: 
+    build:
       context: ./
       dockerfile: Dockerfile
-    volumes: 
+    volumes:
       - /app/node_modules
       - ./:/app
     # ports:
     #   - 5000:5000
-    environment: 
+    environment:
       MONGO_URI: ${MONGO_URI}
       JWT_SECRET: ${JWT_SECRET}
       EMAIL_SERVICE: ${EMAIL_SERVICE}
@@ -25,10 +25,10 @@ services:
     container_name: memories-frontend
     restart: always
     stdin_open: true
-    build: 
+    build:
       context: ./frontend
       dockerfile: Dockerfile
-    volumes: 
+    volumes:
       - /app/node_modules
       - ./frontend:/app
     # ports:
@@ -46,9 +46,9 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    ports: 
+    ports:
       - 80:80
-    networks: 
+    networks:
       - memories-mern-app
 
 networks:
