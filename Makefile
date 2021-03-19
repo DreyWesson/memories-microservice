@@ -19,6 +19,9 @@ down:
 prune:
 	docker image prune
 
+sys_prune:
+	docker system prune
+
 check_config:
 	docker-compose config
 
