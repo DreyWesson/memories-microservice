@@ -32,5 +32,11 @@ volume:
 	docker volume inspect memories_mongodb-data
 
 # check USER
-# check_user: 
-# 	docker exec image_name ps aux
+check_backend_user:
+	docker exec memories-backend  ps aux
+
+check_frontend_user:
+	docker exec memories-backend  ps aux
+
+check_nginx_user:
+	docker exec memories_nginx_1 ps aux
