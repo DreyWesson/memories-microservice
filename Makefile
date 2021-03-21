@@ -4,7 +4,7 @@ ifneq (,$(wildcard ./.env))
 	ENV_FILE_PARAM = --env-file .env
 endif
 
-build:
+build_dev:
 	docker-compose up --build
 
 build_prod:
@@ -43,3 +43,12 @@ check_frontend_user:
 
 check_nginx_user:
 	docker exec memories_nginx_1 ps aux
+
+delete_volume:
+	docker volume rm $(docker volume ls -qf dangling=true)
+
+delete_volumes:
+	docker system prune --volumes
+
+check_user:
+	docker exec $(image_name)  ps aux

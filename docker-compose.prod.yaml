@@ -6,9 +6,9 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./:/app
     # ports:
     #   - 5000:5000
     environment:
@@ -28,9 +28,9 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./frontend:/app
+    # volumes:
+    #   - /app/node_modules
+    #   - ./frontend:/app
     # ports:
     #   - 3000:3000
     networks:
@@ -48,6 +48,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+      - 443:443
     networks:
       - memories-mern-app
 
